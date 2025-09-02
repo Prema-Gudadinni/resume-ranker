@@ -1,0 +1,5 @@
+/* simple styles, or use Tailwind if you prefer */
+body { margin: 0; font-family: Inter, Arial, sans-serif; background:#0f172a; color:#e6eef8; }
+.container { max-width: 1000px; margin: 30px auto; padding: 20px; }
+.card { background:#111827; padding:16px; border-radius:10px; box-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+button { cursor:pointer; }
