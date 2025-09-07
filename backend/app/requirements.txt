@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+openai
+supabase
+httpx
+pydantic
+PyMuPDF
+pytesseract
+Pillow
+sendgrid
+numpy
+psycopg2-binary
+alembic    # optional for migrations
+python-dotenv
