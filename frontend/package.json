@@ -2,36 +2,22 @@
   "name": "resume-ranker-frontend",
   "version": "0.1.0",
   "private": true,
-  "main": "src/index.js",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000"
+  },
   "dependencies": {
     "axios": "^1.4.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "recharts": "^2.6.2"
+    "next": "13.4.7",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "recharts": "^2.6.2",
+    "tailwindcss": "^3.4.0"
   },
-  "scripts": {
-    "start": "cross-env PORT=3000 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@types/node": "24.3.1",
+    "@types/react": "19.1.12",
+    "typescript": "5.9.2"
   }
 }
