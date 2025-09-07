@@ -1,5 +1,6 @@
 # app/main.py
 from dotenv import load_dotenv
+from fastapi import FastAPI
 load_dotenv()
 import os
 import io
