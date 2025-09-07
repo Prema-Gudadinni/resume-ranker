@@ -17,7 +17,7 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 # Test connection (optional)
 try:
-    response = supabase.table("your_table_name").select("*").limit(1).execute()
+    response = supabase.table("resumes").select("*").limit(1).execute()
     print("Supabase connection successful:", response.data)
 except Exception as e:
     print("Error connecting to Supabase:", e)
