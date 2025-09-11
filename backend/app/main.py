@@ -89,7 +89,6 @@ async def upload_resume(user_id: str = Form(...), file: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail="Upload failed")
 
 # ================== INDEX EMBEDDINGS ==================
-# ================== INDEX EMBEDDINGS ==================
 @app.post("/index-embeddings")
 def index_embeddings(resume_ids: List[str]):
     try:
