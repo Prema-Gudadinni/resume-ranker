@@ -121,7 +121,7 @@ def rank(req: RankRequest):
         r = supabase.table("resume_rankings").insert({
             "job_id": None,  # placeholder until you link jobs
             "resume_id": None,
-            "score": 0.0
+            "score": 7
         }).execute()
         ranking_id = r.data[0]["id"]
 
