@@ -6,6 +6,7 @@ export default function Home() {
   const [files, setFiles] = useState<FileList | null>(null);
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [jobDesc, setJobDesc] = useState<string>("");
 
   async function handleUpload() {
     if (!files) return alert("Choose files first");
@@ -22,10 +23,11 @@ export default function Home() {
       await axios.post(`${process.env.NEXT_PUBLIC_API_BASE}/upload`, fd, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+
       alert("Uploaded resumes successfully ✅");
     } catch (err) {
       console.error("Upload error:", err);
-      alert("Upload failed ❌");
+      alert("Upload failed ❌ — check backend logs.");
     } finally {
       setLoading(false);
     }
@@ -36,6 +38,8 @@ export default function Home() {
     if (!job.trim()) return;
 
     setLoading(true);
+    setJobDesc(job);
+
     try {
       const resp = await axios.post(
         `${process.env.NEXT_PUBLIC_API_BASE}/rank`,
@@ -46,15 +50,15 @@ export default function Home() {
         }
       );
 
-      // ✅ Make sure results exist in backend response
       if (resp.data?.results) {
         setResults(resp.data.results);
       } else {
         alert("No ranking results returned ❌");
+        setResults([]);
       }
     } catch (err) {
       console.error("Rank error:", err);
-      alert("Ranking failed ❌");
+      alert("Ranking failed ❌ — check backend logs.");
     } finally {
       setLoading(false);
     }
@@ -63,6 +67,7 @@ export default function Home() {
   return (
     <div style={{ padding: 24 }}>
       <h1>AI Resume Ranker</h1>
+
       <input type="file" multiple onChange={(e) => setFiles(e.target.files)} />
       <button onClick={handleUpload} disabled={loading}>
         {loading ? "Uploading..." : "Upload"}
@@ -71,12 +76,23 @@ export default function Home() {
         {loading ? "Ranking..." : "Rank"}
       </button>
 
+      {jobDesc && (
+        <div style={{ marginTop: 20 }}>
+          <h3>Job Description:</h3>
+          <p>{jobDesc}</p>
+        </div>
+      )}
+
       <div style={{ marginTop: 20 }}>
         {results.length > 0 ? (
           results.map((r: any, idx: number) => (
             <div
               key={r.resume?.id || idx}
-              style={{ borderBottom: "1px solid #ddd", padding: 8 }}
+              style={{
+                borderBottom: "1px solid #ddd",
+                padding: 8,
+                marginBottom: 4,
+              }}
             >
               <strong>{r.resume?.filename || "Unknown resume"}</strong> — score:{" "}
               {(r.score * 100).toFixed(2)}%
